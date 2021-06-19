@@ -1,6 +1,7 @@
 package com.example.myapplication.view
 
-import Device.isconnected
+
+import Utils.isconnected
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -30,24 +31,29 @@ class MainActivity : AppCompatActivity() {
            viewModel.refresh()
        }
         else{
-           list_error.visibility = View.VISIBLE
+           loadingIndicator.visibility=View.GONE
+           rootLayout.visibility=View.GONE
            Toast.makeText(this,"Connect to internet",Toast.LENGTH_LONG).show()
        }
 
-
     }
-
     private fun observeViewModel() {
         viewModel.apod.observe(this, Observer {
             it?.let {
-                Toast.makeText(this,"Fetched details"+it,Toast.LENGTH_LONG).show()
-                Glide.with(this).load(it.url).into(imageView);
+                apod_title_TV.text="Title: "+it.title
+                apod_date_TV.text="Date: "+it.date
+                apod_desc_TV.text="Discription: "+it.explanation
+                apod_copyright_TV.text="Copyright: "+it.copyright
+                Glide.with(this).load(it.hdurl).into(imageView);
+                Glide.with(this).load(it.url).into(imageview_small);
 
             }
         })
 
         viewModel.loadError.observe(this, Observer {
             it?.let {
+
+
                 list_error.visibility = if (it) View.VISIBLE else View.GONE
             }
 
@@ -63,5 +69,7 @@ class MainActivity : AppCompatActivity() {
             }
         })
     }
+
+
 
 }

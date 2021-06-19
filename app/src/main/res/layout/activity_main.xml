@@ -1,41 +1,108 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+
+<ScrollView
+    android:fillViewport="true"
+    android:id="@+id/movie_view"
     android:layout_height="match_parent"
-    tools:context=".view.MainActivity">
-
-
-
-<ImageView
-    android:id="@+id/imageView"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:src="@color/black"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent"/>
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
-        <TextView
-            android:id="@+id/list_error"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:text="@string/error_occured_while_loading_data"
-            android:gravity="center"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="MissingConstraints" />
 
-        <ProgressBar
-            android:id="@+id/loadingIndicator"
-            android:layout_width="wrap_content"
+<LinearLayout
+    android:id="@+id/rootLayout"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:background="@android:color/white">
+
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_height="300dp"
+        android:layout_width="match_parent"
+        android:scaleType="centerCrop"
+        tools:src="@drawable/ic_launcher_background"/>
+
+    <!-- Details layout -->
+    <LinearLayout
+        android:background="@android:color/white"
+        android:id="@+id/movie_details_layout"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:paddingBottom="20dp"
+        android:paddingLeft="21dp"
+        android:paddingRight="30dp">
+
+        <ImageView
+            android:id="@+id/imageview_small"
+            android:layout_height="100dp"
+            android:layout_marginTop="25dp"
+            android:layout_width="100dp"
+            tools:src="@drawable/ic_launcher_background"/>
+
+        <LinearLayout
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="MissingConstraints" />
+            android:layout_marginLeft="13dp"
+            android:layout_marginTop="18dp"
+            android:layout_width="wrap_content"
+            android:orientation="vertical">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <!-- Title text view -->
+            <TextView
+                android:id="@+id/apod_title_TV"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:textSize="@dimen/text_16_SP"
+                android:textStyle="bold"
+                tools:text="title"/>
+
+            <!-- Runtime text view -->
+            <TextView
+                android:id="@+id/apod_copyright_TV"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_width="wrap_content"
+                android:text="Copy Right"
+                android:textSize="@dimen/text_16_SP" />
+
+            <!-- Date text view -->
+            <TextView
+                android:id="@+id/apod_date_TV"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="11dp"
+                android:layout_width="wrap_content"
+                android:textSize="@dimen/text_16_SP"
+                tools:text="2015-12-05"/>
+
+            <!-- Rating text view -->
+            <TextView
+                android:id="@+id/apod_desc_TV"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_width="wrap_content"
+                android:textSize="@dimen/text_16_SP"
+                tools:text="5.5"/>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+    <TextView
+        android:id="@+id/list_error"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="@string/error_occured_while_loading_data"
+        android:gravity="center"
+        />
+
+    <ProgressBar
+        android:id="@+id/loadingIndicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
+
+</LinearLayout>
+
+    </ScrollView>
