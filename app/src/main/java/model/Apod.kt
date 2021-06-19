@@ -1,5 +1,7 @@
 package model
 
+import com.google.gson.annotations.SerializedName
+
 
 /*{
     "copyright": "Justin Anderson",
@@ -11,4 +13,17 @@ package model
     "title": "Northern Summer Twilight",
     "url": "https://apod.nasa.gov/apod/image/2106/IMG_1088_resize1024.jpg"
 }*/
-data class Apod(val copyright:String,val date:String,val explanation:String,val title:String,val hdurl:String)
+data class Apod(
+    @SerializedName("copyright")
+    val copyright:String,
+    @SerializedName("date")
+    val date:String,
+    @SerializedName("explanation")
+    val explanation:String,
+    @SerializedName("title")
+    val title:String,
+    @SerializedName("hdurl")
+    val hdurl:String,
+    @SerializedName("url")
+    val url:String
+)

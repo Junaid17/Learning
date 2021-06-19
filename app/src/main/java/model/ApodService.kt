@@ -13,7 +13,7 @@ class ApodService {
     DaggerAPIComponent.create().inject(this)
     }
 
-    fun getCountries():Single<Apod>{
+    fun getApod():Single<Apod>{
         return api.getApod()
     }
 }

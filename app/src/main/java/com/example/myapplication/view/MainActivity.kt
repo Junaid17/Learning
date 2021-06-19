@@ -1,20 +1,21 @@
 package com.example.myapplication.view
 
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
+import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
-import android.view.Menu
-import android.view.MenuItem
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
+import com.bumptech.glide.Glide
 import com.example.myapplication.databinding.ActivityMainBinding
+import kotlinx.android.synthetic.main.activity_main.*
+import viewmodel.ApodViewModel
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var appBarConfiguration: AppBarConfiguration
+    lateinit var viewModel: ApodViewModel
     private lateinit var binding: ActivityMainBinding
+    val TAG =MainActivity::class.java.simpleName
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,7 +23,37 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        viewModel= ViewModelProviders.of(this).get(ApodViewModel::class.java)
+        viewModel.refresh()
+        observeViewModel()
+
 
     }
 
+    private fun observeViewModel() {
+        viewModel.apod.observe(this, Observer {
+            it?.let {
+                Toast.makeText(this,"Fetched details"+it,Toast.LENGTH_LONG).show()
+                Glide.with(this).load(it.url).into(imageView);
+
+            }
+        })
+
+        viewModel.loadError.observe(this, Observer {
+            it?.let {
+                list_error.visibility = if (it) View.VISIBLE else View.GONE
+            }
+
+        })
+
+        viewModel.loading.observe(this, Observer {
+            it?.let {
+                loadingIndicator.visibility = if (it) View.VISIBLE else View.GONE
+                if (it) {
+                    list_error.visibility = View.GONE
+
+                }
+            }
+        })
+    }
 }
