@@ -1,5 +1,6 @@
 package com.example.myapplication.view
 
+import Device.isconnected
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -24,8 +25,14 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         viewModel= ViewModelProviders.of(this).get(ApodViewModel::class.java)
-        viewModel.refresh()
-        observeViewModel()
+       if( isconnected()) {
+           observeViewModel()
+           viewModel.refresh()
+       }
+        else{
+           list_error.visibility = View.VISIBLE
+           Toast.makeText(this,"Connect to internet",Toast.LENGTH_LONG).show()
+       }
 
 
     }
@@ -56,4 +63,5 @@ class MainActivity : AppCompatActivity() {
             }
         })
     }
+
 }
