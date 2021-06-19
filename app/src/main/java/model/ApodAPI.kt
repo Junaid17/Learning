@@ -2,9 +2,10 @@ package model
 
 import io.reactivex.Single
 import retrofit2.http.GET
+import retrofit2.http.Query
 
 interface ApodAPI {
 
-    @GET("/planetary/apod?api_key=TwBS3vlBDbKZ6mDk62hKW2fwzc37bXZ055TgCu7k")
-    fun getApod(): Single<Apod>
+    @GET("/planetary/apod?")
+    fun getApod(@Query("api_key") api_key : String): Single<Apod>
 }

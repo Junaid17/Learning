@@ -1,6 +1,7 @@
 package model
 
 import com.example.learning.di.DaggerAPIComponent
+import com.example.myapplication.BuildConfig
 import io.reactivex.Single
 import javax.inject.Inject
 
@@ -14,6 +15,6 @@ class ApodService {
     }
 
     fun getApod():Single<Apod>{
-        return api.getApod()
+        return api.getApod(BuildConfig.APOD_API_KEY)
     }
 }

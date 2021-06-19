@@ -16,6 +16,7 @@ android {
         versionName "1.0"
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField("String", "APOD_API_KEY",APOD_API_KEY)
     }
 
     buildTypes {
